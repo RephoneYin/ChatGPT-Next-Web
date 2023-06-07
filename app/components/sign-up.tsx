@@ -1,4 +1,4 @@
-import styles from "./auth.module.scss";
+import styles from "./sign-up.module.scss";
 import { IconButton } from "./button";
 
 import { useNavigate } from "react-router-dom";
@@ -8,7 +8,7 @@ import Locale from "../locales";
 
 import BotIcon from "../icons/bot.svg";
 
-export function AuthPage() {
+export function SignUpPage() {
   const navigate = useNavigate();
   const access = useAccessStore();
 
@@ -21,13 +21,13 @@ export function AuthPage() {
         <BotIcon />
       </div>
 
-      <div className={styles["auth-title"]}>{Locale.Auth.Title}</div>
-      <div className={styles["auth-tips"]}>{Locale.Auth.Tips}</div>
+      <div className={styles["auth-title"]}>{Locale.SignUp.Title}</div>
+      <div className={styles["auth-tips"]}>{Locale.SignUp.Tips}</div>
 
       <input
         className={styles["auth-input"]}
         type="text"
-        placeholder={Locale.Auth.InputAccount}
+        placeholder={Locale.SignUp.InputAccount}
         value={access.accessAccount}
         onChange={(e) => {
           access.updateCode(e.currentTarget.value);
@@ -37,7 +37,17 @@ export function AuthPage() {
       <input
         className={styles["auth-input"]}
         type="password"
-        placeholder={Locale.Auth.InputPassword}
+        placeholder={Locale.SignUp.InputPassword}
+        value={access.accessPassword}
+        onChange={(e) => {
+          access.updateCode(e.currentTarget.value);
+        }}
+      />
+
+      <input
+        className={styles["auth-input"]}
+        type="password"
+        placeholder={Locale.SignUp.InputPasswordConfirm}
         value={access.accessPassword}
         onChange={(e) => {
           access.updateCode(e.currentTarget.value);
@@ -45,17 +55,22 @@ export function AuthPage() {
       />
 
       <div className={styles["auth-actions"]}>
-        <IconButton text={Locale.Auth.LogIn} type="primary" onClick={goHome} />
-
         <IconButton
-          text={Locale.Auth.SignUp}
+          text={Locale.SignUp.Reset}
           type="danger"
           bordered
-          onClick={goSignUp}
+          onClick={goHome}
+        />
+
+        <IconButton
+          text={Locale.SignUp.SignUp}
+          type="primary"
+          bordered
+          onClick={goHome}
         />
       </div>
       <div className={styles["auth-actions"]}>
-        <IconButton text={Locale.Auth.Later} onClick={goHome} />
+        <IconButton text={Locale.SignUp.Later} onClick={goHome} />
       </div>
     </div>
   );

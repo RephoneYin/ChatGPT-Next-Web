@@ -24,6 +24,7 @@ import {
 import { SideBar } from "./sidebar";
 import { useAppConfig } from "../store/config";
 import { AuthPage } from "./auth";
+import { SignUpPage } from "./sign-up";
 
 export function Loading(props: { noLogo?: boolean }) {
   return (
@@ -104,6 +105,7 @@ function Screen() {
   const location = useLocation();
   const isHome = location.pathname === Path.Home;
   const isAuth = location.pathname === Path.Auth;
+  const isSignUp = location.pathname === Path.SignUp;
   const isMobileScreen = useMobileScreen();
 
   useEffect(() => {
@@ -121,9 +123,12 @@ function Screen() {
         }`
       }
     >
-      {isAuth ? (
+      {isAuth || isSignUp ? (
         <>
-          <AuthPage />
+          <Routes>
+            <Route path={Path.Auth} element={<AuthPage />} />
+            <Route path={Path.SignUp} element={<SignUpPage />} />
+          </Routes>
         </>
       ) : (
         <>
